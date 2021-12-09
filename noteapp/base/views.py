@@ -117,9 +117,14 @@ def create_note(request):
     return redirect('home')
 
 def delete_note(request, note_id):
-    note = Note.objects.get(id=note_id)
-    note.delete()
-    return redirect('home')
+    if request.user.is_authenticated:
+        note = Note.objects.get(id=note_id)
+
+        print(f"request.user.id is {request.user.id}, note.user_id is {note.user_id}")
+        
+        #if request.user.id == note.user_id:
+        note.delete()
+        return redirect('home')
 
 
 
