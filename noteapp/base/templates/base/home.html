@@ -1,0 +1,40 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+    {% if request.user.is_authenticated %}  
+    <h1>Your personal notes</h1>
+    {% else %}
+    <h1>Welcome!</h1>
+    {% endif %}
+
+    {% if request.user.is_authenticated %}
+    <button class="create-note-button">Create new note</button>
+    <form action="create-note/" method="post" id="create-note-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Create">
+    </form>
+    
+
+    {% endif %}
+
+    <div class="note-wrapper">
+        {% for note in notes %}
+
+        <div class="note">
+            <p>
+                {% if request.user.is_authenticated %}
+                    @{{ note.user.username }}
+                {% else %}
+                    @NoteBot
+                {% endif %}
+            </p>
+            <h3>{{ note.title }}</h3>
+            <p>{{ note.text }}</p>
+        </div>
+
+        {% endfor %}
+    </div>
+
+{% endblock %}

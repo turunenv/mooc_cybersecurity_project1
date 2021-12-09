@@ -1,0 +1,27 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<div class="note-wrapper">
+    {% for note in notes %}
+
+    <div class="note">
+        <p>
+            <!-- Here we have forgotten to check if the user is logged in, allowing anyone to see the notes -->
+
+            <!-- Fix by uncommenting the if-statements below -->
+            <!-- {% if request.user.is_authenticated %} -->
+                @{{ note.user.username }}
+
+                <h3>{{ note.title }}</h3>
+                <p>{{ note.text }}</p>
+            
+            <!-- {% endif %} -->
+        </p>
+        
+    </div>
+
+    {% endfor %}
+</div>
+
+{% endblock %}
