@@ -7,6 +7,7 @@ from django.contrib.auth.forms import UserCreationForm
 from .forms import NoteForm
 import sqlite3
 from datetime import datetime
+from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
 
@@ -82,7 +83,7 @@ def home(request):
 
     return render(request, 'base/home.html', context)
 
-
+@csrf_exempt
 def create_note(request):
     
     # if request.method == 'POST':

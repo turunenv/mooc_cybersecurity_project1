@@ -11,7 +11,7 @@
     {% if request.user.is_authenticated %}
     <button class="create-note-button">Create new note</button>
     <form action="create-note/" method="post" id="create-note-form">
-        {% csrf_token %}
+        <!-- {% csrf_token %} -->
         {{ form.as_p }}
         <input type="submit" value="Create">
     </form>
