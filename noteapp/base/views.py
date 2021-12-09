@@ -5,6 +5,8 @@ from django.contrib import messages
 from .models import Note
 from django.contrib.auth.forms import UserCreationForm
 from .forms import NoteForm
+import sqlite3
+from datetime import datetime
 
 # Create your views here.
 
@@ -83,14 +85,43 @@ def home(request):
 
 def create_note(request):
     
-    if request.method == 'POST':
-        form = NoteForm(request.POST)
-        if form.is_valid():
-            print("form was valid")
-            form.save()
-        else:
-            print("noo rigged formmm")
+    # if request.method == 'POST':
+    #     form = NoteForm(request.POST)
+    #     if form.is_valid():
+            
+    #         form.save()
+    #     else:
+    #         messages.error(request, "Form data was not valid.")
+
+    data = request.POST
+    print(f"data is {data}")
+    
+
+    connection = sqlite3.connect('db.sqlite3')
+    cursor = connection.cursor()
+    print("CONNECTION ESTABLISHED")
+
+
+    try:
+        if data["private"] == "on":
+            private = 1
+    except:
+        private = 0
+
+
+    cursor.execute("INSERT INTO base_note (user_id, title, text, private, date_created) VALUES ('{}','{}','{}','{}', '{}');".format(data["user"], data["title"], data["text"], private, datetime.now()))
+    connection.commit()
+    connection.close()
+
+
     return redirect('home')
+
+def delete_note(request, note_id):
+    note = Note.objects.get(id=note_id)
+    note.delete()
+    return redirect('home')
+
+
 
 def private_note(request, note_id):
     return HttpResponse(f"You are looking at note page for note {note_id}")
