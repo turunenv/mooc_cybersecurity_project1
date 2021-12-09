@@ -31,8 +31,15 @@
                 {% endif %}
             </p>
             <h3>{{ note.title }}</h3>
-            <p>{{ note.text }}</p>
+            <p class="main-note">{{ note.text }}</p>
+
+            
+            <form action="delete-note/{{ note.id }}/" method="POST">
+                {% csrf_token %}
+                <input type="submit" value="Delete note">
+            </form>
         </div>
+        
 
         {% endfor %}
     </div>
