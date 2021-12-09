@@ -14,6 +14,10 @@ nav {
    
 }
 
+a:hover {
+    text-decoration: none;
+}
+
 nav>ul {
     display: flex;
     flex-direction: row;
@@ -65,6 +69,13 @@ h1 {
 
 .create-note-button {
     margin: 5px;
+}
+
+
+
+.main-note {
+    padding-top: 10px;
+    padding-bottom: 5px;
 }
 
 #create-note-form {
