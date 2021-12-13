@@ -33,11 +33,13 @@
             <h3>{{ note.title }}</h3>
             <p class="main-note">{{ note.text }}</p>
 
-            
+            {% if request.user.is_authenticated %}
             <form action="delete-note/{{ note.id }}/" method="POST">
                 {% csrf_token %}
                 <input type="submit" value="Delete note">
             </form>
+            {% endif %}
+            
         </div>
         
 

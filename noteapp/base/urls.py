@@ -8,7 +8,7 @@ urlpatterns = [
 
     path('', views.home, name='home'),
 
-    path('<int:note_id>/', views.private_note, name='private_note'),
+    
     path('public/', views.public, name='public'),
 
     path('create-note/', views.create_note, name='create-note'),

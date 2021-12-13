@@ -68,9 +68,6 @@ def home(request):
             'title': 'Did I say that outloud?',
             'text': 'Anyways, happy surfing, be sure to share all your sensitive data with us, we promise to keep it safe!',
         },
-        {
-
-        },
     ]
 
     context = {'form': form}
@@ -129,11 +126,10 @@ def delete_note(request, note_id):
 
 
 
-def private_note(request, note_id):
-    return HttpResponse(f"You are looking at note page for note {note_id}")
 
 def public(request):
     public_notes = Note.objects.filter(private=False)
+    print(f"public notes is {public_notes}")
     context = {
         'notes': public_notes,
     }

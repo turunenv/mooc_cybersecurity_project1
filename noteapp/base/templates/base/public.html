@@ -2,26 +2,39 @@
 
 {% block content %}
 
+{% if request.user.is_authenticated %}
 <div class="note-wrapper">
-    {% for note in notes %}
+    
+        {% for note in notes %}
+    
+        <div class="note">
+            <p>
+                
+                
+                    @{{ note.user.username }}
 
-    <div class="note">
-        <p>
-            <!-- Here we have forgotten to check if the user is logged in, allowing anyone to see the notes -->
-
-            <!-- Fix by uncommenting the if-statements below -->
-            <!-- {% if request.user.is_authenticated %} -->
-                @{{ note.user.username }}
-
-                <h3>{{ note.title }}</h3>
-                <p>{{ note.text }}</p>
+                    <h3>{{ note.title }}</h3>
+                    <p>{{ note.text }}</p>
+                
+                
+            </p>
             
-            <!-- {% endif %} -->
-        </p>
-        
-    </div>
+        </div>
 
-    {% endfor %}
+        {% endfor %}
+
+    
+
+    
 </div>
+
+{% else %}
+
+    <h2 class="please-login">
+        <a href="{% url 'login' %}">Please login to see other users' notes!</a>
+    </h2>
+
+
+{% endif %}
 
 {% endblock %}
