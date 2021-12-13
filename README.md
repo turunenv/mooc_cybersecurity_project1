@@ -11,8 +11,6 @@ these flaws are located in the source code, with instructions on how to fix them
 My application is a simple note-app, where users can post private notes on their own wall, as well as public notes 
 on a public wall. The project is implemented with Django.
 
-## OWASP Security Issues, and how to fix them
 
-### FLAW 1:
 
 
